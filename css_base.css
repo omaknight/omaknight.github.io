@@ -1,0 +1,88 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Oct 16, 2024, 5:42:57 PM
+    Author     : Tyler
+*/
+
+/* CSS Base will be used as the default CSS for the calculator home page. */
+body {
+    text-align: center;
+    background-color: #25362a;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFDE;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+}
+
+h1 {
+    letter-spacing: 1px;
+    transition: letter-spacing 0.5s ease;
+}
+
+h1:hover {
+    letter-spacing: 5px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #dddddd;
+    text-align: center;
+    line-height: 25px;
+}
+
+footer li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.main-page-box, #calculatorElements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+table {
+    width: 60%;
+    table-layout: fixed;
+    flex-shrink: 0;
+    border-collapse: collapse;
+}
+
+th, td, tr {
+    border: 1px solid #111;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+    height: auto;
+}
+
+.fixed-size {
+    width: 32px;
+    height: 32px;
+}
+
+input[type="button"] {
+    transform:scale(1.5);
+    font-size: 16px;
+}
