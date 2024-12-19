@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+    <link rel="stylesheet" href="css_base.css">
+    <link rel="icon" type="image/png" href="Favicon/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="Favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="Favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>About the Calculator</h1>
+    <h2>Shiny Odds Modifiers</h2>
+    <h3>Hypermode</h3>
+    <p>Hypermode allows you to increase your chain to 40, instead of 39. This increases your shiny odds while chaining from 1/400 to 1/200.</p>
+    <h3>Shiny Charm</h3>
+    <p>Shiny Charms multiply your odds by 2.5 times. They last 24 hours.</p>
+    <h3>Gold Amulet</h3>
+    <p>The Gold Amulet multiplies your odds by 1.25 times. It is a permanent reward from achieving Ace Rank.</p>
+    <h3>Pokemon of the Day</h3>
+    <p>Hatching the Pokemon of the Day multiplies your odds by 1.1 times. It is a random, hatchable Pokemon daily.</p>
+    <h3>Sei Power</h3>
+    <p>This boost is more complex than a simple multiplier. It can be determined by the following formula:
+        <br/>Shiny Boost = 1/(sqrt(Initial Shiny Odds) * sqrt(50-(Sei Power)))</p>
+    <p class="footnote">Provided by the Official PFQ Wiki</p>
+
+    <h2>Albino Odds Modifiers</h2>
+    <h3>Albino Radar</h3>
+    <p>At least level 1 charge is required to obtain Albinos, and therefore Melanistic Pokemon, at all. It has seven levels, with each level giving you a different base odds.
+        <br/>They are as follows:
+        <ol>
+            <li>1: 1/6144</li>
+            <li>2: 1/3072</li>
+            <li>3: 1/1536</li>
+            <li>4: 1/768</li>
+            <li>5: 1/480</li>
+            <li>6: 1/270</li>
+            <li>7: 1/180</li>
+        </ol>
+    </p>
+    <h3>Silver Amulet</h3>
+    <p>The Silver Amulet multiplies your odds by 1 + 1/3 times. It is a permanent reward from achieving Ultra Rank.</p>
+    <p class="footnote">The multiplier for this really is 1 + 1/3, NOT 1.33. It's weird.</p>
+    <h3>Z-Crystal</h3>
+    <p>Z-Crystals multiply your odds by 1.5 times, assuming the hatched Pokemon matches the type of crystal used.</p>
+    <h3>Type Race Buff / Stellar V-Wave</h3>
+    <p>The Stellar V-Wave multiplies your odds by 1.2 times. It is often referred to as the Type Race Buff, as it is only active during Type Races.</p>
+    <h2>Melanistic Odds Modifiers</h2>
+    <h3>How are these applied?</h3>
+    <p>Multipliers or buffs to melanistic Pokemon chances are applied <i>AFTER</i> you successfully roll for a Shiny.
+        <br/>They are applied directly to your Albino odds, increasing the chances by the listed multipliers.</p>
+    <p>When an egg is hatched, the game rolls for a shiny; if it succeeds, it rolls for Albino with the melanistic buffs applied. If it succeeds, you get a Melanistic. If this fails, you get a Shiny.
+        <br/>If the Shiny roll fails, roll for an Albino. If this succeeds, you get an Albino. If it fails, it is normal.</p>
+    <h3>Ubercharm</h3>
+    <p>The Ubercharm multiplies your melanistic odds by 6 times.</p>
+    <h3>Cobalt Amulet</h3>
+    <p>The Cobalt Amulet provides a dynamic multiplier, based on your current chain. It is a reward from obtaining Arceus Rank.
+        <br/>This reward is <i>NOT</i> permanent; you must maintain Arceus Rank or better to continue using it.
+    </p>
+    <p>The multiplier is an additional 1.015 times for every 100 eggs hatched, up to 1.75 times (which is reached at a chain of 5,000).</p>
+    <h2>What about the code?</h2>
+    <p>All code is visible at <a href="https://github.com/omaknight/omaknight.github.io" target="_blank">the GitHub page.</a> Look for index.html for the calculator.</p>
+    <br/><br/><br/>
+</body>
+<footer>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</footer>
+</html>
