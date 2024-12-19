@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="css_base.css">
+    <link rel="icon" type="image/png" href="Favicon/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="Favicon/favicon.svg" />
+    <link rel="shortcut icon" href="Favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="Favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>PFQ S/A/M Odds Calculator</h1>
+    <div class="main-page-box">
+        <div id="calculatorElements">
+            <table border="3">
+                <thead>
+                    <tr>
+                        <th>Shiny Related</th>
+                        <th>Albino Related</th>
+                        <th>Melan Related</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="Images/hypermode.png"><label for="hypermode">Hypermode</label><br/><input type="checkbox" id="hypermode"></td>
+                        <td><img src="Images/albinoradar.png"><label for="radar">Albino Radar</label><br/><input type="number" id="radar" max="7" min="0"></td>
+                        <td><img src="Images/uber.png"><label for="ubercharm">Ubercharm</label><br/><input type="checkbox" id="ubercharm"></td>
+                        <td><p id="calcshinyResult">Shiny Odds: 1/X</p></td>
+                    </tr>
+                    <tr>
+                        <td><img src="Images/shiny.png"><label for="shinycharm">Shiny Charm</label><br/><input type="checkbox" id="shinycharm"></td>
+                        <td><img src="Images/silveramulet.png"><label for="silveramulet">Silver Amulet</label><br/><input type="checkbox" id="silveramulet"></td>
+                        <td><img src="Images/egg.png"><label for="chain">Chain</label><br/><input type="number" id="chain" max="5000" min="0"></td>
+                        <td><p id="calcAlbinoResult">Albino Odds: 1/X</p></td>
+                    </tr>
+                    <tr>
+                        <td><img src="Images/goldamulet.png"><label for="goldamulet">Gold Amulet</label><br/><input type="checkbox" id="goldamulet"></td>
+                        <td><img src="Images/zcrystal.png"><label for="zcrystal">Z-Crystal</label><br/><input type="checkbox" id="zcrystal"></td>
+                        <td><img src="Images/cobaltamulet.png"><label for="cobaltamulet">Cobalt Amulet</label><br/><input type="checkbox" id="cobaltamulet"></td>
+                        <td><p id="calcMelanResult">Melan Odds: 1/X</p></td>
+                    </tr>
+                    <tr>
+                        <td><img src="Images/egg.png"><label for="potd">PotD</label><br/><input type="checkbox" id="potd"></td>
+                        <td><img src="Images/stellar.png" class="fixed-size"><label for="typerace">Type Race</label><br/><input type="checkbox" id="typerace"></td>
+                        <td colspan="2"><input type="button" id="result" value="Calculate" onclick="calculateOdds()"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="Images/sei.png"><label for="seipower">Sei Power</label><br/><input type="number" id="seipower" max="25" min="0"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Calculator starts here. 
+    Special Thanks:
+        Husky
+        Trodaire
+        emii
+        Helicopter
+        yk
+        Asdjaskljd
+        bluee
+    who were all present to help answer questions and give advice. -->
+        
+    <script>
+        function calculateOdds(){
+            let hasHypermode = document.getElementById("hypermode").checked;
+            let hasShinyCharm = document.getElementById("shinycharm").checked;
+            let hasGoldAmulet = document.getElementById("goldamulet").checked;
+            let hasPOTD = document.getElementById("potd").checked;
+            let currentSeiPower = document.getElementById("seipower").value;
+            
+            let hasRadar = document.getElementById("radar").value;
+            let hasSilverAmulet = document.getElementById("silveramulet").checked;
+            let hasZCrystal = document.getElementById("zcrystal").checked;
+            let hasTypeRace = document.getElementById("typerace").checked;
+            let hasUbercharm = document.getElementById("ubercharm").checked;
+            let hasCobaltAmulet = document.getElementById("cobaltamulet").checked;
+            let currentChain = document.getElementById("chain").value;
+            
+            let shinyResult = 0;
+            let albinoResult = 0;
+            let melanResult = 0;
+            let radarBase = 0;
+            switch (hasRadar) {
+                case '1': radarBase = 6144;
+                    break;
+                case '2': radarBase = 3072;
+                    break;
+                case '3': radarBase = 1536;
+                    break;
+                case '4': radarBase = 768;
+                    break;
+                case '5': radarBase = 480;
+                    break;
+                case '6': radarBase = 270;
+                    break;
+                case '7': radarBase = 180;
+                    break;
+                default: radarBase = 0;
+                    break;
+            }
+            
+            let hypermodeMod = hasHypermode ? -200 : 0;
+            let shinyCharmMod = hasShinyCharm ? 2.5 : 1;
+            let goldAmuletMod = hasGoldAmulet ? 1.25 : 1;
+            let potdMod = hasPOTD ? 1.1 : 1;
+            
+            if (currentSeiPower > 5) {
+                shinyResult = Math.ceil(Math.sqrt((400 + hypermodeMod) / shinyCharmMod / goldAmuletMod / potdMod * (50 - currentSeiPower)));
+            }
+            else {
+                shinyResult = Math.ceil((400 + hypermodeMod) / shinyCharmMod / goldAmuletMod / potdMod);
+            }
+            document.getElementById("calcshinyResult").textContent = "Shiny Odds: 1/" + shinyResult;
+            
+            let silverAmuletMod = hasSilverAmulet ? 1 + 1/3 : 1;
+            let zCrystalMod = hasZCrystal ? 1.5 : 1;
+            let typeRaceMod = hasTypeRace ? 1.2 : 1;
+            
+            albinoResult = radarBase / silverAmuletMod / zCrystalMod / typeRaceMod;
+            document.getElementById("calcAlbinoResult").textContent = "Albino Odds: 1/" + albinoResult;
+            
+            let longChainBonus = hasCobaltAmulet ? (Math.floor(currentChain)/100) * 1.5 : 0;
+            if (longChainBonus >= 75) {
+                longChainBonus = 75;
+            }
+            
+            let ubercharmMod = hasUbercharm ? 6 : 1;
+            
+            melanResult = (shinyResult * Math.ceil(albinoResult / ((longChainBonus/100) + 1) / ubercharmMod));
+            document.getElementById("calcMelanResult").textContent = "Melan Odds: 1/" + melanResult;
+        }
+    </script>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+</html>
