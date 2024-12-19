@@ -21,6 +21,10 @@ a {
     color: #87b4c9;
 }
 
+a:visited {
+    color: #87b4c9;
+}
+
 .footnote {
     color:#85a68d;
     font-size: 12px;
