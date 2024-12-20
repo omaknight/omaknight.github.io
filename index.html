@@ -53,6 +53,9 @@
                     </tr>
                     <tr>
                         <td><img src="Images/sei.png"><label for="seipower">Sei Power</label><br/><input type="number" id="seipower" max="25" min="0"></td>
+                        <td colspan="3"><input type="text" id="API" size="32" placeholder="Enter API Key, or Leave Blank">
+                        <br/><p>Need help? Check out the <a href="API.html">API</a> page.</p>
+                        <p class="footnote" id="APIerror"></p></td>
                     </tr>
                 </tbody>
             </table>
@@ -71,20 +74,64 @@
         
     <script>
         function calculateOdds(){
-            let hasHypermode = document.getElementById("hypermode").checked;
-            let hasShinyCharm = document.getElementById("shinycharm").checked;
-            let hasGoldAmulet = document.getElementById("goldamulet").checked;
-            let hasPOTD = document.getElementById("potd").checked;
-            let currentSeiPower = document.getElementById("seipower").value;
-            
-            let hasRadar = document.getElementById("radar").value;
-            let hasSilverAmulet = document.getElementById("silveramulet").checked;
-            let hasZCrystal = document.getElementById("zcrystal").checked;
-            let hasTypeRace = document.getElementById("typerace").checked;
-            let hasUbercharm = document.getElementById("ubercharm").checked;
-            let hasCobaltAmulet = document.getElementById("cobaltamulet").checked;
-            let currentChain = document.getElementById("chain").value;
-            
+            let APIKey = document.getElementById('API').value;
+            let hasAPIKey = false;
+            let hasHypermode, hasShinyCharm, hasGoldAmulet, hasPOTD, currentSeiPower, hasRadar, hasSilverAmulet, hasZCrystal, 
+                hasTypeRace, hasUbercharm, hasCobaltAmulet, currentChain;
+
+            if (APIKey) {
+                fetch(`https://api.pokefarm.com/boosts`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `${APIKey}`
+                    }
+                })
+                .then(async response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error. Status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    console.log(data);
+                    document.getElementById('APIerror').textContent = ``;
+
+                    hasHypermode = data.hyperMode;
+                    console.log(data.hyperMode);
+                    hasShinyCharm = data.shinyCharm;
+                    hasGoldAmulet = data.goldAmulet;
+                    hasPOTD = data.potd;
+                    currentSeiPower = data.seiPower;
+
+                    hasRadar = data.albinoLevel;
+                    hasSilverAmulet = data.silverAmulet;
+                    hasZCrystal = data.zCrystal;
+                    hasTypeRace = data.typeRace;
+                    hasUbercharm = data.uberCharm;
+                    hasCobaltAmulet = data.cobaltAmulet;
+                    currentChain = data.shinyChainCount;
+                    calculateResults(hasHypermode, hasShinyCharm, hasGoldAmulet, hasPOTD, currentSeiPower, hasRadar, hasSilverAmulet, hasZCrystal, hasTypeRace, hasUbercharm, hasCobaltAmulet, currentChain);
+                })
+                .catch(error => {
+                    document.getElementById('APIerror').textContent = `Error! ${error.message}`;
+                })
+            } 
+            else {
+                hasHypermode = document.getElementById("hypermode").checked;
+                hasShinyCharm = document.getElementById("shinycharm").checked;
+                hasGoldAmulet = document.getElementById("goldamulet").checked;
+                hasPOTD = document.getElementById("potd").checked;
+                currentSeiPower = document.getElementById("seipower").value;
+
+                hasRadar = document.getElementById("radar").value;
+                hasSilverAmulet = document.getElementById("silveramulet").checked;
+                hasZCrystal = document.getElementById("zcrystal").checked;
+                hasTypeRace = document.getElementById("typerace").checked;
+                hasUbercharm = document.getElementById("ubercharm").checked;
+                hasCobaltAmulet = document.getElementById("cobaltamulet").checked;
+                currentChain = document.getElementById("chain").value;
+                calculateResults(hasHypermode, hasShinyCharm, hasGoldAmulet, hasPOTD, currentSeiPower, hasRadar, hasSilverAmulet, hasZCrystal, hasTypeRace, hasUbercharm, hasCobaltAmulet, currentChain);
+            }
+        }
+        function calculateResults(hasHypermode, hasShinyCharm, hasGoldAmulet, hasPOTD, currentSeiPower, hasRadar, hasSilverAmulet, hasZCrystal, hasTypeRace, hasUbercharm, hasCobaltAmulet, currentChain){
             let shinyResult = 0;
             let albinoResult = 0;
             let melanResult = 0;
@@ -99,7 +146,7 @@
                 case '4': radarBase = 768;
                     break;
                 case '5': radarBase = 480;
-                    break;
+                     break;
                 case '6': radarBase = 270;
                     break;
                 case '7': radarBase = 180;
@@ -137,6 +184,18 @@
             
             melanResult = (shinyResult * Math.ceil(albinoResult / ((longChainBonus/100) + 1) / ubercharmMod));
             document.getElementById("calcMelanResult").textContent = "Melan Odds: 1/" + melanResult;
+            document.getElementById("hypermode").checked = hasHypermode;
+            document.getElementById("shinycharm").checked = hasShinyCharm;
+            document.getElementById("goldamulet").checked = hasGoldAmulet;
+            document.getElementById("potd").checked = hasPOTD;
+            document.getElementById("seipower").value = currentSeiPower;
+            document.getElementById("radar").value = hasRadar;
+            document.getElementById("silveramulet").checked = hasSilverAmulet;
+            document.getElementById("zcrystal").checked = hasZCrystal;
+            hasTypeRace = document.getElementById("typerace").checked = hasTypeRace;
+            document.getElementById("ubercharm").checked = hasUbercharm;
+            document.getElementById("cobaltamulet").checked = hasCobaltAmulet;
+            document.getElementById("chain").value = currentChain;
         }
     </script>
     <footer>
